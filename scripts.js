@@ -1,46 +1,61 @@
 // Write your JavaScript code here.
 // Remember to pay attention to page loading!
-function init() {
-    const takeoff = document.getElementById("takeoff");
-    const landing = document.getElementById("landing");
-    const missionabort = document.getElementById("missionAbort");
-    const flightStatus = document.getElementById("flightStatus");
-    const shuttleBackground = document.getElementById("shuttleBackground");
-    const spaceShuttleHeight = document.getElementById("spaceShuttleHeight");
-    
-    function takeoffClick () {
-        if (confirm("Confirm that the shuttle is ready for takeoff.")){
+
+window.addEventListener('load', function() {
+
+    let takeOffBtn = getElementById("takeoff");
+    takeOffBtn.addEventListener('click', function() {
+        //when the take off button is clicked ...
+        let isReadyToLaunch = window.confirm("Confirm that the shuttle is ready for takeoff.")
+        console.log(isReadyToLaunch);
+        if(isReadyToLaunch) {
+            let flightStatus = document.getElementById("flightStatus");
             flightStatus.innerHTML = "Shuttle in flight.";
-            shuttleBackground.style.backgroundColor = "blue";
-            spaceShuttleHeight.innerHTML = "10,000";
-        } 
-    };
-
-    function landingClick(){
-        alert("The shuttle is landing. Landing gear engaged.");
-        flightStatus.innerHTML = "The shuttle had landed.";
-        shuttleBackground.style.backgroundColor = "green";
-        spaceShuttleHeight.innerHTML = "0";
-    };
-
-    function missionAbortClick(){
-        if (confirm("Confirm that you want to abort the mission.")){
-            flightStatus.innerHTML = "Mission aborted.";
-            shuttleBackground.style.backgroundColor = "green";
-            spaceShuttleHeight.innerHTML = "0"
+            let shuttleFlightScreen = document.getElementById("shuttleBackground");
+            shuttleFlightScreen.setAttribute("style", "background-color: blue");
+            let shuttleHeight = document.getElementById("spaceSHuttleHeight");
+            shuttleHeight.innerText = "10000";
         }
-    };
+    });
 
-    function upClick(){};
-    function downClick(){};
-    function leftClick(){};
-    function rightClick(){};
+    let landingBtn = getElementById("landing");
+    landingBtn.addEventListener('click', function() {
+        window.alert("The shuttle is landing. Landing gear engaged.");
+        let flightStatus = document.getElementById("flightStatus");
+        flightStatus.innerHTML = "The shuttle has landed.";
+        let shuttleFlightScreen = document.getElementById("shuttleBackground");
+        shuttleFlightScreen.setAttribute("style", "background-color: green");
+        let shuttleHeight = document.getElementById("spaceSHuttleHeight");
+        shuttleHeight.innerText = "0";
+    });
 
-    takeoff.addEventListener("click", takeoffClick);
-    landing.addEventListener("click", landingClick);
-    missionabort.addEventListener("click", missionAbortClick);
-    
+    let abortMissionBtn = document.getElementById("missionAbort");
+    abortMissionBtn.addEventListener('click', function() {
+        let shouldAbortMission = window.confirm("Confirm that you want to abort the mission.");
+        if (shouldAbortMission) {
+            let flightStatus = document.getElementById("flightStatus");
+            flightStatus.innerHTML = "Mission aborted.";
+            let shuttleFlightScreen = document.getElementById("shuttleBackground");
+            shuttleFlightScreen.setAttribute("style", "background-color: blue");
+            let shuttleHeight = document.getElementById("spaceSHuttleHeight");
+            shuttleHeight.innerText = "10000";
+        }
+    });
 
-};
+    let upBtn = document.getElementById("up");
+    upBtn.addEventListener('click', function(){
+        let shuttleHeight = document.getElementById("spaceSHuttleHeight");
+        let shuttleHeightAmount = Number.shuttleHeight.innerText
+        shuttleHeightAmount += 10000;
+        shuttleHeight.innerText = shuttleHeightAmount;
+    });
 
-window.addEventListener("load", init);
+    let downBtn = document.getElementById("down");
+    downBtn.addEventListener('click', function(){
+        let shuttleHeight = document.getElementById("spaceSHuttleHeight");
+        let shuttleHeightAmount = Number.shuttleHeight.innerText
+        shuttleHeightAmount -= 10000;
+        shuttleHeight.innerText = shuttleHeightAmount;
+    });
+
+});
